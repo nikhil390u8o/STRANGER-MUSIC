@@ -13,12 +13,12 @@ BOT_TOKEN = getenv("BOT_TOKEN")
 
 # Bot and owner info
 OWNER_USERNAME = getenv("OWNER_USERNAME", "SHIVANSHDEVS")
-BOT_USERNAME = getenv("BOT_USERNAME", "SapnaMusicRobot")
-BOT_NAME = getenv("BOT_NAME", "SAPNA")
+BOT_USERNAME = getenv("BOT_USERNAME", "RADHIKA_999U_MUSIC_BOT")
+BOT_NAME = getenv("BOT_NAME", "𝗥𝗔𝗗𝗛𝗜𝗞𝗔 𝘟 𝗠𝗨𝗦𝗜𝗖")
 ASSUSERNAME = getenv("ASSUSERNAME", "KHWAAISH_HOON")
 
 # MongoDB
-MONGO_DB_URI = getenv("MONGO_DB_URI", None)
+MONGO_DB_URI = getenv("MONGO_DB_URI", "mongodb+srv://gurjasharma3:B8osAJ8FeinFOjNV@cluster0pandababy.cwkui6e.mongodb.net/AviaxMusic?retryWrites=true&w=majority&tls=true")
 
 # Limits and IDs
 DURATION_LIMIT_MIN = int(getenv("DURATION_LIMIT", 17000))
