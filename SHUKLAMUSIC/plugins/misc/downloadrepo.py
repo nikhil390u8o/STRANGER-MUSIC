@@ -30,12 +30,15 @@ import shutil
 import os
 from SHUKLAMUSIC import app
 
-
+# Make sure downloads folder exists
+os.makedirs("./downloads/", exist_ok=True)
 
 @app.on_message(filters.command(["downloadrepo"]))
 def download_repo(_, message):
     if len(message.command) != 2:
-        message.reply_text("Please provide the GitHub repository URL after the command. Example: /downloadrepo Repo Url ")
+        message.reply_text(
+            "Please provide the GitHub repository URL after the command.\n\nExample:\n`/downloadrepo https://github.com/user/repo.git`"
+        )
         return
 
     repo_url = message.command[1]
@@ -46,21 +49,22 @@ def download_repo(_, message):
             message.reply_document(zip_file)
         os.remove(zip_path)
     else:
-        message.reply_text("Unable to download the specified GitHub repository.")
+        message.reply_text("❌ Unable to download the specified GitHub repository.")
 
 
 def download_and_zip_repo(repo_url):
+    repo_name = repo_url.split("/")[-1].replace(".git", "")
+    repo_path = os.path.join("./downloads/", repo_name)
+    zip_file = os.path.join("./downloads/", f"{repo_name}.zip")
+
     try:
-        repo_name = repo_url.split("/")[-1].replace(".git", "")
-        repo_path = f"{repo_name}"
-        
-        # Clone the repository
-        repo = git.Repo.clone_from(repo_url, repo_path)
-        
-        # Create a zip file of the repository
+        # Clone into ./downloads/repo_name
+        git.Repo.clone_from(repo_url, repo_path)
+
+        # Create zip inside downloads folder
         shutil.make_archive(repo_path, 'zip', repo_path)
 
-        return f"{repo_path}.zip"
+        return zip_file
     except Exception as e:
         print(f"Error downloading and zipping GitHub repository: {e}")
         return None
