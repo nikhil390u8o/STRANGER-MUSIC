@@ -2,7 +2,6 @@ import re
 from os import getenv
 from dotenv import load_dotenv
 from pyrogram import filters
-
 # Load environment variables
 load_dotenv()
 
@@ -112,3 +111,11 @@ if SUPPORT_CHAT and not re.match(r"(?:http|https)://", SUPPORT_CHAT):
     raise SystemExit(
         "[ERROR] - Your SUPPORT_CHAT url is invalid. It must start with https://"
     )
+
+# Download directory (Render safe: /tmp is always writable)
+import os
+
+DOWNLOAD_DIR = os.getenv("DOWNLOAD_DIR", "/tmp/downloads")
+
+if not os.path.exists(DOWNLOAD_DIR):
+    os.makedirs(DOWNLOAD_DIR)
